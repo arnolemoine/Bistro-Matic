@@ -8,7 +8,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "bistromatic.h"
+#include "include/my.h"
+
+char *eval_expr(char const *base, char const *ops,
+    char const *expr, unsigned int size) {
+    return NULL;
+}
 
 static char *get_expr(unsigned int size)
 {
@@ -60,7 +65,7 @@ int main(int ac, char **av)
     }
     check_base(av[1]);
     check_ops(av[2]);
-    size = my_atoi(av[3]);
+    size = my_getnbr(av[3]);
     expr = get_expr(size);
     my_putstr(eval_expr(av[1], av[2], expr, size));
     return (EXIT_SUCCESS);

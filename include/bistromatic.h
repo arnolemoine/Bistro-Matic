@@ -27,6 +27,6 @@
     #define ERROR_MSG "error"
 
 char *eval_expr(char const *base, char const *ops,
-		char const *expr, unsigned int size);
+    char const *expr, unsigned int size);
 
 #endif
