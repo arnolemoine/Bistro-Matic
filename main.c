@@ -11,7 +11,8 @@
 #include "include/my.h"
 
 char *eval_expr(char const *base, char const *ops,
-    char const *expr, unsigned int size) {
+    char const *expr, unsigned int size)
+{
     return NULL;
 }
 
