@@ -24,9 +24,12 @@ num_t factor_parser(parser_t *parser)
     int sign = 1;
     num_t num;
 
-    while (parser->expr[parser->pos] == '+' || parser->expr[parser->pos] == '-')
+    while (parser->expr[parser->pos] == '+' ||
+        parser->expr[parser->pos] == '-') {
         if (parser->expr[parser->pos] == '-')
             sign *= -1;
+        parser->pos++;
+    }
     if (parser->expr[parser->pos] == '(') {
         parser->pos++;
         num = expr_parser(parser);
@@ -56,6 +59,8 @@ num_t term_parser(parser_t *parser)
             printf("division\n");
         if (o == '%')
             printf("modulo\n");
+        num_t right = factor_parser(parser);
+        num = right;
     }
     return num;
 }
@@ -63,23 +68,17 @@ num_t term_parser(parser_t *parser)
 num_t expr_parser(parser_t *parser)
 {
     num_t num = term_parser(parser);
+    num_t right;
+    char op = 0;
 
-    while (parser->expr[parser->pos] == '+' || parser->expr[parser->pos] == '-') {
-        if (parser->expr[parser->pos] == '+') {
-            num = addition(parser);
-            parser->pos++;
-        }
-        if (parser->expr[parser->pos] == '-') {
-            num = subtraction();
-            parser->pos++;
-        }
+    while (parser->expr[parser->pos] == '+' ||
+        parser->expr[parser->pos] == '-') {
+        op = parser->expr[parser->pos];
+        parser->pos++;
+        right = term_parser(parser);
+        if (op == '+')
+        if (op == '-')
+        num = right;
     }
     return num;
-}
-
-char **parser(parser_t *parser)
-{
-    num_t num = expr_parser(parser);
-
-    return NULL;
 }
