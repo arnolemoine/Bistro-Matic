@@ -8,11 +8,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "bistromatic.h"
 #include "my.h"
 
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size)
 {
+    char **parsed_expr = parser(expr);
+
     return (char *)expr;
 }
 

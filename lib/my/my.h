@@ -14,7 +14,6 @@
     #include <unistd.h>
     #include <signal.h>
     #include <fcntl.h>
-    #include "bistromatic.h"
     #define ERROR 84
     #define BUF_SIZE 100000
 

@@ -5,30 +5,35 @@
 ## makefile
 ##
 
+CC =    epiclang
+
 NAME =  calc
+
 SRC =   src/main.c\
 		src/check/check_base.c\
 		src/check/check_ops.c\
 		src/helper.c\
+		src/parser/parser.c\
 
 OBJ =   $(SRC:.c=.o)
-CC =    epiclang
-CFLAGS = -I./include/
+
+CFLAGS = -I./include
+
+CERRORS = -Wall -Wextra
 
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-		make -C ./lib/my/
-		$(CC) $(CFLAGS) $(OBJ) -Llib/my -lmy -o $(NAME)
+		$(MAKE) -C ./lib/my/
+		$(CC) $(CFLAGS) $(OBJ) -L ./lib/my -lmy -o $(NAME)
 
 clean :
+		$(MAKE) clean -C ./lib/my
 		rm -f $(OBJ)
-		rm -f test
-		make clean -C ./lib/my/
 
 fclean : clean
+		$(MAKE) fclean -C ./lib/my
 		rm -f $(NAME)
-		make fclean -C ./lib/my/
 
 re: fclean all
 		rm -f $(OBJ)

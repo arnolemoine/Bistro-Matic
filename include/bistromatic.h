@@ -32,5 +32,6 @@ char *get_expr(unsigned int size);
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);
+char **parser(const char *expr);
 
 #endif

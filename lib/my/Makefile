@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2025
 ## makefile
 ## File description:
-## makefile for bistromatic
+## makefile for my_radar
 ##
 
 NAME = libmy.a
@@ -25,7 +25,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)
-	cp my.h bistromatic.h ../../include/
+	cp my.h ../../include
 
 clean:
 	rm -f $(OBJ)
