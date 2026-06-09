@@ -15,14 +15,18 @@ char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size)
 {
     parser_t pars;
-    char **parsed_expr = NULL;
+    num_t num;
 
     pars.base = (char *)base;
     pars.expr = (char *)expr;
     pars.ops = (char *)ops;
     pars.pos = 0;
-    parsed_expr = parser(&pars);
-    return (char *)expr;
+    num = expr_parser(&pars);
+    if (pars.expr[pars.pos] != '\0') {
+        my_putstr(SYNTAX_ERROR_MSG);
+        exit(EXIT_USAGE);
+    }
+    return num.digits;
 }
 
 char *get_expr(unsigned int size)

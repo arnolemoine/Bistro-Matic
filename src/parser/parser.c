@@ -8,31 +8,14 @@
 #include "my.h"
 #include "bistromatic.h"
 
-num_t expr_parser(parser_t *parser)
+num_t num_parser(parser_t *parser)
 {
-    num_t num = term_parser(parser);
+    int start = parser->pos;
+    num_t num;
 
-    for (; parser->expr[parser->pos]; parser->pos++) {
-
-    }
-    return num;
-}
-
-num_t term_parser(parser_t *parser)
-{
-    num_t num = factor_parser(parser);
-    char o = 0;
-
-    while (parser->expr[parser->pos] == '*' || parser->expr[parser->pos] == '/' || parser->expr[parser->pos] == '%') {
-        o = parser->expr[parser->pos];
+    while (is_base_char(parser->expr[parser->pos], parser->base))
         parser->pos++;
-        if (o == '*')
-            printf("multiplication\n");
-        if (o == '/')
-            printf("division\n");
-        if (o =='%')
-            printf("modulo\n");
-    }
+    num.digits = my_strndup(parser->expr + start, parser->pos - start);
     return num;
 }
 
@@ -58,14 +41,39 @@ num_t factor_parser(parser_t *parser)
     return num;
 }
 
-num_t num_parser(parser_t *parser)
+num_t term_parser(parser_t *parser)
 {
-    int start = parser->pos;
-    num_t num;
+    num_t num = factor_parser(parser);
+    char o = 0;
 
-    while (is_base_char(parser->expr[parser->pos], parser->base))
+    while (parser->expr[parser->pos] == '*' || parser->expr[parser->pos]
+        == '/' || parser->expr[parser->pos] == '%') {
+        o = parser->expr[parser->pos];
         parser->pos++;
-    num.digits = my_strndup(parser->expr + start, parser->pos - start);
+        if (o == '*')
+            printf("multiplication\n");
+        if (o == '/')
+            printf("division\n");
+        if (o == '%')
+            printf("modulo\n");
+    }
+    return num;
+}
+
+num_t expr_parser(parser_t *parser)
+{
+    num_t num = term_parser(parser);
+
+    while (parser->expr[parser->pos] == '+' || parser->expr[parser->pos] == '-') {
+        if (parser->expr[parser->pos] == '+') {
+            num = addition(parser);
+            parser->pos++;
+        }
+        if (parser->expr[parser->pos] == '-') {
+            num = subtraction();
+            parser->pos++;
+        }
+    }
     return num;
 }
 

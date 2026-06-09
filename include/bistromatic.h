@@ -46,4 +46,12 @@ void check_base(char const *b);
 int helper(void);
 char **parser(parser_t *parser);
 
+num_t expr_parser(parser_t *parser);
+num_t term_parser(parser_t *parser);
+num_t factor_parser(parser_t *parser);
+num_t num_parser(parser_t *parser);
+
+num_t addition(parser_t *parser);
+
+
 #endif

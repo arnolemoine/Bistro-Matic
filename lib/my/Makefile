@@ -19,6 +19,7 @@ SRC = 	my_putchar.c\
 	my_getnbr.c\
 	my_strncpy.c\
         my_strndup.c\
+        is_base_char.c\
 
 OBJ = $(SRC:.c=.o)
 
