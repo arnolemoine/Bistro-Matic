@@ -9,6 +9,7 @@ NAME =  calc
 SRC =   src/main.c\
 		src/check/check_base.c\
 		src/check/check_ops.c\
+		src/helper.c\
 
 OBJ =   $(SRC:.c=.o)
 CC =    epiclang

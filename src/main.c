@@ -42,6 +42,10 @@ int main(int ac, char **av)
     unsigned int size = 0;
     char *expr = NULL;
 
+    if (ac == 2 && my_strcmp(av[0], "-h")) {
+        helper();
+        return 0;
+    }
     if (ac != 4) {
         my_putstr("Usage: ");
         my_putstr(av[0]);
