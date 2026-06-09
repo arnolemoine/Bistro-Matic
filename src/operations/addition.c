@@ -19,8 +19,9 @@ static int fill_digits(num_t *left, num_t *right, char *buf, int max_len)
     int sum = 0;
 
     while (i < max_len || carry) {
-        l_digit = (i < left_len) ? (left->digits[i] - '0') : 0;
-        r_digit = (i < right_len) ? (right->digits[i] - '0') : 0;
+        l_digit = (i < left_len) ? (left->digits[left_len - 1 - i] - '0') : 0;
+        r_digit = (i < right_len) ?
+            (right->digits[right_len - 1 - i] - '0') : 0;
         sum = l_digit + r_digit + carry;
         carry = sum / 10;
         buf[i] = (sum % 10) + '0';
@@ -41,6 +42,7 @@ num_t addition(num_t *left, num_t *right)
     if (!res.digits)
         return res;
     fill_digits(left, right, res.digits, max_len);
+    res.digits = my_revstr(res.digits);
     res.sign = 1;
     return res;
 }
