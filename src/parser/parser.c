@@ -21,13 +21,12 @@ num_t num_parser(parser_t *parser)
 
 num_t factor_parser(parser_t *parser)
 {
-    int sign = 1;
     num_t num;
 
     while (parser->expr[parser->pos] == '+' ||
         parser->expr[parser->pos] == '-') {
         if (parser->expr[parser->pos] == '-')
-            sign *= -1;
+            num.sign *= -1;
         parser->pos++;
     }
     if (parser->expr[parser->pos] == '(') {
@@ -40,13 +39,13 @@ num_t factor_parser(parser_t *parser)
         parser->pos++;
     } else
         num = num_parser(parser);
-    num.sign = sign;
     return num;
 }
 
 num_t term_parser(parser_t *parser)
 {
     num_t num = factor_parser(parser);
+    num_t right;
     char o = 0;
 
     while (parser->expr[parser->pos] == '*' || parser->expr[parser->pos]
@@ -59,7 +58,7 @@ num_t term_parser(parser_t *parser)
             printf("division\n");
         if (o == '%')
             printf("modulo\n");
-        num_t right = factor_parser(parser);
+        right = factor_parser(parser);
         num = right;
     }
     return num;
@@ -77,8 +76,9 @@ num_t expr_parser(parser_t *parser)
         parser->pos++;
         right = term_parser(parser);
         if (op == '+')
+            num = addition(&num, &right);
         if (op == '-')
-        num = right;
+            printf("sub\n");
     }
     return num;
 }

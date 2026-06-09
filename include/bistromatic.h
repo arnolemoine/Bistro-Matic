@@ -51,7 +51,7 @@ num_t term_parser(parser_t *parser);
 num_t factor_parser(parser_t *parser);
 num_t num_parser(parser_t *parser);
 
-num_t addition(parser_t *parser);
+num_t addition(num_t *left, num_t *right);
 
 
 #endif

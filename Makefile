@@ -14,6 +14,7 @@ SRC =   src/main.c\
 		src/check/check_ops.c\
 		src/helper.c\
 		src/parser/parser.c\
+		src/operations/addition.c\
 
 OBJ =   $(SRC:.c=.o)
 
