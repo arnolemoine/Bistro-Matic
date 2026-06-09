@@ -16,6 +16,11 @@ static int fill_digits(num_t *left, num_t *right, char *buf, int max_len)
     int i = 0;
 
     while (i < max_len || carry) {
+        int l_digit = (i < left_len) ? (left->digits[i] - '0') : 0;
+        int r_digit = (i < right_len) ? (right->digits[i] - '0') : 0;
+        int sum = l_digit + r_digit + carry;
+        carry = sum / 10;
+        buf[i] = (sum % 10) + '0';
         i++;
     }
     buf[i] = '\0';
