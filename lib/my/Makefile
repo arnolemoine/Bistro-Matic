@@ -24,13 +24,13 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@cp my.h bistromatic.h ../../include/
+	ar rc $(NAME) $(OBJ)
+	cp my.h bistromatic.h ../../include/
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean : clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
