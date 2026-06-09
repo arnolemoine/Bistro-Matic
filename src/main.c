@@ -14,8 +14,14 @@
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size)
 {
-    char **parsed_expr = parser(expr);
+    parser_t pars;
+    char **parsed_expr = NULL;
 
+    pars.base = (char *)base;
+    pars.expr = (char *)expr;
+    pars.ops = (char *)ops;
+    pars.pos = 0;
+    parsed_expr = parser(&pars);
     return (char *)expr;
 }
 

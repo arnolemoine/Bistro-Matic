@@ -26,12 +26,24 @@
     #define SYNTAX_ERROR_MSG "syntax error"
     #define ERROR_MSG "error"
 
+typedef struct s_parser {
+    const char *expr;
+    int pos;
+    char *base;
+    char *ops;
+} parser_t;
+
+typedef struct s_num {
+    char *digits;
+    int sign;
+} num_t;
+
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size);
 char *get_expr(unsigned int size);
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);
-char **parser(const char *expr);
+char **parser(parser_t *parser);
 
 #endif
