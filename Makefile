@@ -15,12 +15,6 @@ OBJ =   $(SRC:.c=.o)
 CC =    epiclang
 CFLAGS = -I./include/
 
-TEST_FLAGS = $(shell pkg-config --cflags --libs criterion)
-
-test: test.c
-	$(CC) $(CFLAGS) test.c -o test $(TEST_FLAGS)
-	./test
-
 all: $(NAME)
 
 $(NAME) : $(OBJ)
