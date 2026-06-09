@@ -18,6 +18,7 @@ SRC = 	my_putchar.c\
 	get_nb_r.c\
 	my_getnbr.c\
 	my_strncpy.c\
+        my_strndup.c\
 
 OBJ = $(SRC:.c=.o)
 
