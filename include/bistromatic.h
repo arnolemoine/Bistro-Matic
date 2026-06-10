@@ -26,6 +26,8 @@
     #define SYNTAX_ERROR_MSG "syntax error"
     #define ERROR_MSG "error"
 
+    #define EXPR_POS parser->expr[parser->pos]
+
 typedef struct s_parser {
     const char *expr;
     int pos;
