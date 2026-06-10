@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include "bistromatic.h"
 
 void check_base(char const *b)
 {

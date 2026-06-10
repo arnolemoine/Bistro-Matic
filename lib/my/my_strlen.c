@@ -7,11 +7,11 @@
 
 int my_strlen(char const *str)
 {
-    int length = 0;
+    int len = 0;
 
     while (*str != '\0'){
-        length++;
+        len++;
         str++;
     }
-    return length;
+    return len;
 }

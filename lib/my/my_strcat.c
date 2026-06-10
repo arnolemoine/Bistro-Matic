@@ -5,24 +5,15 @@
 ** strcat
 */
 
-int my_strlen1(char const *str)
-{
-    int length = 0;
-
-    while (*str != '\0'){
-        length++;
-        str++;
-    }
-    return length;
-}
+#include "my.h"
 
 char *my_strcat(char *dest, char const *src)
 {
-    int dest_length = my_strlen1(dest);
+    int dest_len = my_strlen(dest);
     int i = 0;
 
     for (i = 0; i < src[i] != '\0'; i++)
-        dest[dest_length + i] = src[i];
-    dest[dest_length + i] = '\0';
+        dest[dest_len + i] = src[i];
+    dest[dest_len + i] = '\0';
     return dest;
 }
