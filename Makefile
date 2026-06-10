@@ -6,10 +6,15 @@
 ##
 
 NAME =  calc
-SRC =   src/main.c\
-		src/check/check_base.c\
-		src/check/check_ops.c\
-		src/helper.c\
+SRC =   src/check/check_base.c \
+		src/check/check_ops.c \
+		src/compute/compute_add.c \
+		src/conversion/convert_base.c \
+		src/expressions/eval_expr.c \
+		src/expressions/translate_expr.c \
+		src/infinite/infinite_add.c \
+		src/helper.c \
+		src/main.c
 
 OBJ =   $(SRC:.c=.o)
 CC =    epiclang

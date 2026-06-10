@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2026
-** Une_petite_biere-BTTF
+** Bistro-Matic
 ** File description:
 ** helper
 */

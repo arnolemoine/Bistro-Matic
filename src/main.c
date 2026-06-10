@@ -11,13 +11,7 @@
 #include "my.h"
 #include "bistromatic.h"
 
-char *eval_expr(char const *base, char const *ops,
-    char const *expr, unsigned int size)
-{
-    return (char *)expr;
-}
-
-char *get_expr(unsigned int size)
+static char *get_expr(unsigned int size)
 {
     char *expr = NULL;
 

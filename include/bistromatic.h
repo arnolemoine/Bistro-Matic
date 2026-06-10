@@ -26,11 +26,20 @@
     #define SYNTAX_ERROR_MSG "syntax error"
     #define ERROR_MSG "error"
 
+// expressions
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size);
-char *get_expr(unsigned int size);
+// checks & helper
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);
+// infinite_add
+char *infin_add(char *num1, char *num2);
+void compute_addition(char *num1, char *num2, char *result, int *lengths);
+// translate_expr
+void translate_expr(char *expr, char const *b, char const *ops);
+int get_idx(char c, char const *str);
+// conversion
+char *convert_to_base_str(char *res, char const *base);
 
 #endif
