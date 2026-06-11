@@ -32,5 +32,7 @@ char *get_expr(unsigned int size);
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);
+char *remove_leading_zeros(char *str);
+char *convert_to_base_str(char *res, char const *base);
 
 #endif
