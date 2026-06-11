@@ -43,7 +43,9 @@ OBJ =	$(SRC:.c=.o)
 
 CFLAGS = -I./include
 
-all: $(NAME)
+CFLAGS = -I./include
+
+CERRORS = -Wall -Wextra
 
 $(NAME): $(OBJ)
 	@echo "\n"
