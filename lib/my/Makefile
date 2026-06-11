@@ -20,7 +20,7 @@ SRC = 	my_putchar.c\
 	my_strncpy.c\
         my_strndup.c\
         is_base_char.c\
-        my_revstr.c\
+        my_revstr.c
 
 OBJ = $(SRC:.c=.o)
 
