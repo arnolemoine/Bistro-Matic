@@ -47,6 +47,8 @@ CFLAGS = -I./include
 
 CERRORS = -Wall -Wextra
 
+all: $(NAME)
+
 $(NAME): $(OBJ)
 	@echo "\n"
 	@echo "$(CYAN)** Compiling lib **:"
