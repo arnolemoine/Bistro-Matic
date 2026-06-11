@@ -54,7 +54,7 @@ $(NAME): compile_lib $(OBJ)
 	$(CC) $(OBJ) -L./lib/my -lmy -o $(NAME)
 
 compile_lib:
-	@make -C ./lib/my/
+	$(MAKE) -C ./lib/my/
 
 tests_run:
 	gcc $(SRC_NO_MAIN) $(TESTS_SRC) $(CFLAGS) $(CRIT_FLAGS) -L ./lib/my -lmy -o $(TESTS_BIN)
