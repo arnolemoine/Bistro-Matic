@@ -39,37 +39,41 @@ SRC =	src/check/check_base.c \
 		src/helper.c \
 		src/main.c
 
-OBJ =	$(SRC:.c=.o)
+OBJ =   $(SRC:.c=.o)
+CFLAGS = -I./include/
 
-CFLAGS = -I./include
+SRC_NO_MAIN = $(filter-out src/main.c, $(SRC))
 
-CFLAGS = -I./include
-
-CERRORS = -Wall -Wextra
+CRIT_FLAGS =	-lcriterion --coverage
+TESTS_SRC =		tests/test_bistromatic.c
+TESTS_BIN =		unit_tests
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@echo "\n"
-	@echo "$(CYAN)** Compiling lib **:"
-	@echo "\n"
-	$(MAKE) -C ./lib/my/
-	$(CC) $(CFLAGS) $(OBJ) -L ./lib/my -lmy -o $(NAME)
-	@echo "$(END)"
+$(NAME): compile_lib $(OBJ)
+	$(CC) $(OBJ) -L./lib/my -lmy -o $(NAME)
 
-clean:
-	@echo "$(YELLOW)** Cleaning Objects **:"
-	@echo "\n"
-	$(MAKE) clean -C ./lib/my
+compile_lib:
+	@make -C ./lib/my/
+
+tests_run:
+	gcc $(SRC_NO_MAIN) $(TESTS_SRC) $(CFLAGS) $(CRIT_FLAGS) -L ./lib/my -lmy -o $(TESTS_BIN)
+	./$(TESTS_BIN) --quiet || true
+	@gcovr -r . --exclude tests/ --exclude include/
+
+clean :
 	rm -f $(OBJ)
-	@echo "$(END)"
+	rm -f test
+	make clean -C ./lib/my/
 
-fclean: clean
-	@echo "$(GREEN)** Removing Library and binary **:"
-	@echo "\n"
-	$(MAKE) fclean -C ./lib/my
+fclean : fclean_tests clean
 	rm -f $(NAME)
-	@echo "$(END)"
+	make fclean -C ./lib/my/
+
+fclean_tests: fclean
+	rm -f $(TESTS_BIN)
+	rm -f *.gcda *.gcno
+	rm -f src/**/*.gcda src/**/*.gcno
 
 re: fclean all
 	rm -f $(OBJ)
