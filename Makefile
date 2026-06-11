@@ -37,7 +37,9 @@ SRC =	src/check/check_base.c \
 		src/parser/parser.c \
 		src/parser/parser_utils.c \
 		src/helper.c \
-		src/main.c
+		src/main.c \
+		src/infinite/compare_infinites.c \
+		src/parser_utils.c \
 
 OBJ =   $(SRC:.c=.o)
 CFLAGS = -I./include/
@@ -61,6 +63,17 @@ tests_run:
 	./$(TESTS_BIN) --quiet || true
 	@gcovr -r . --exclude tests/ --exclude include/
 
+tests:
+		$(MAKE) -C ./lib/my
+		$(MAKE) all
+		epiclang -I./include tests/*.c src/operations/addition.c -L./lib/my -lmy $(shell pkg-config --cflags --libs criterion) -o tests/run_tests
+		./tests/run_tests
+
+.PHONY: tests
+
+clean_tests:
+		rm -f tests/run_tests
+
 clean :
 	rm -f $(OBJ)
 	rm -f test
@@ -70,6 +83,9 @@ fclean : fclean_tests clean
 	rm -f $(NAME)
 	make fclean -C ./lib/my/
 
+fclean : clean_tests clean
+		rm -f $(NAME)
+		make fclean -C ./lib/my/
 fclean_tests: fclean
 	rm -f $(TESTS_BIN)
 	rm -f *.gcda *.gcno
