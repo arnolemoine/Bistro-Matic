@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2026
-** parser
+** Bistro-Matic
 ** File description:
 ** parser
 */
@@ -8,75 +8,73 @@
 #include "my.h"
 #include "bistromatic.h"
 
-num_t num_parser(parser_t *parser)
+char *parse_parenthesis(char **str)
 {
-    int start = parser->pos;
-    num_t num;
+    char *res;
 
-    while (is_base_char(EXPR_POS, parser->base))
-        parser->pos++;
-    num.digits = my_strndup(parser->expr + start, parser->pos - start);
-    return num;
+    (*str)++;
+    res = parse_expr(str);
+    if (**str == ')') {
+        (*str)++;
+    } else {
+        my_putstr(SYNTAX_ERROR_MSG);
+        exit(84);
+    }
+    return res;
 }
 
-num_t factor_parser(parser_t *parser)
+char *parse_factor(char **str)
 {
-    num_t num;
+    int sign = 1;
+    char *res;
 
-    while (EXPR_POS == parser->ops[2] || EXPR_POS == parser->ops[3]) {
-        if (EXPR_POS == parser->ops[3])
-            num.sign *= -1;
-        parser->pos++;
+    while (**str == '-' || **str == '+') {
+        if (**str == '-')
+            sign *= -1;
+        (*str)++;
     }
-    if (EXPR_POS == parser->ops[0]) {
-        parser->pos++;
-        num = expr_parser(parser);
-        if (EXPR_POS != parser->ops[1]) {
-            my_putstr(SYNTAX_ERROR_MSG);
-            exit(EXIT_BASE);
-        }
-        parser->pos++;
-    } else
-        num = num_parser(parser);
-    return num;
+    if (**str == '(')
+        res = parse_parenthesis(str);
+    else
+        res = get_number(str);
+    return apply_sign(res, sign);
 }
 
-num_t term_parser(parser_t *parser)
+char *parse_term(char **str)
 {
-    num_t num = factor_parser(parser);
-    num_t right;
-    char o = 0;
+    char *res = parse_factor(str);
+    char *val;
+    char *tmp;
+    char op;
 
-    while (EXPR_POS == parser->ops[4] || EXPR_POS
-        == parser->ops[5] || EXPR_POS == parser->ops[6]) {
-        o = EXPR_POS;
-        parser->pos++;
-        if (o == parser->ops[4])
-            printf("multiplication\n");
-        if (o == parser->ops[5])
-            printf("division\n");
-        if (o == parser->ops[6])
-            printf("modulo\n");
-        right = factor_parser(parser);
-        num = right;
+    while (**str == '*' || **str == '/' || **str == '%') {
+        op = **str;
+        (*str)++;
+        val = parse_factor(str);
+        check_zero_str(val, op);
+        tmp = res;
+        res = do_op(res, val, op);
+        free(tmp);
+        free(val);
     }
-    return num;
+    return res;
 }
 
-num_t expr_parser(parser_t *parser)
+char *parse_expr(char **str)
 {
-    num_t num = term_parser(parser);
-    num_t right;
-    char op = 0;
+    char *res = parse_term(str);
+    char *val;
+    char *tmp;
+    char op;
 
-    while (EXPR_POS == parser->ops[2] || EXPR_POS == parser->ops[3]) {
-        op = EXPR_POS;
-        parser->pos++;
-        right = term_parser(parser);
-        if (op == parser->ops[2])
-            num = addition(&num, &right);
-        if (op == parser->ops[3])
-            printf("sub\n");
+    while (**str == '+' || **str == '-') {
+        op = **str;
+        (*str)++;
+        val = parse_term(str);
+        tmp = res;
+        res = do_op(res, val, op);
+        free(tmp);
+        free(val);
     }
-    return num;
+    return res;
 }
