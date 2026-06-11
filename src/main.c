@@ -8,10 +8,29 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "bistromatic.h"
 #include "my.h"
 #include "bistromatic.h"
 
-static char *get_expr(unsigned int size)
+char *eval_expr(char const *base, char const *ops,
+    char const *expr, unsigned int size)
+{
+    parser_t pars;
+    num_t num;
+
+    pars.base = (char *)base;
+    pars.expr = (char *)expr;
+    pars.ops = (char *)ops;
+    pars.pos = 0;
+    num = expr_parser(&pars);
+    if (pars.expr[pars.pos] != '\0') {
+        my_putstr(SYNTAX_ERROR_MSG);
+        exit(EXIT_USAGE);
+    }
+    return num.digits;
+}
+
+char *get_expr(unsigned int size)
 {
     char *expr = NULL;
 

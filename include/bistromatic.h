@@ -26,20 +26,34 @@
     #define SYNTAX_ERROR_MSG "syntax error"
     #define ERROR_MSG "error"
 
-// expressions
+    #define EXPR_POS parser->expr[parser->pos]
+
+typedef struct s_parser {
+    const char *expr;
+    int pos;
+    char *base;
+    char *ops;
+} parser_t;
+
+typedef struct s_num {
+    char *digits;
+    int sign;
+} num_t;
+
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size);
 // checks & helper
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);
-// infinite_add
-char *infin_add(char *num1, char *num2);
-void compute_addition(char *num1, char *num2, char *result, int *lengths);
-// translate_expr
-void translate_expr(char *expr, char const *b, char const *ops);
-int get_idx(char c, char const *str);
-// conversion
-char *convert_to_base_str(char *res, char const *base);
+char **parser(parser_t *parser);
+
+num_t expr_parser(parser_t *parser);
+num_t term_parser(parser_t *parser);
+num_t factor_parser(parser_t *parser);
+num_t num_parser(parser_t *parser);
+
+num_t addition(num_t *left, num_t *right);
+
 
 #endif

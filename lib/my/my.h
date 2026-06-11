@@ -29,5 +29,8 @@ int get_nb_r(char *str);
 char *my_recover_nbr(int nb);
 char **str_to_word_array(char *av, char *delimiter);
 int my_getnbr(const char *str);
+char *my_strndup(const char *str, int n);
+int is_base_char(char c, char *base);
+char *my_revstr(char *str);
 
 #endif /* !MY_H_ */
