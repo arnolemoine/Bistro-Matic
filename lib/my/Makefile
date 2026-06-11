@@ -2,7 +2,7 @@
 ## EPITECH PROJECT, 2025
 ## makefile
 ## File description:
-## makefile for bistromatic
+## makefile for my_radar
 ##
 
 NAME = libmy.a
@@ -18,6 +18,9 @@ SRC = 	my_putchar.c\
 	get_nb_r.c\
 	my_getnbr.c\
 	my_strncpy.c\
+        my_strndup.c\
+        is_base_char.c\
+        my_revstr.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -25,7 +28,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)
-	cp my.h bistromatic.h ../../include/
+	cp my.h ../../include
 
 clean:
 	rm -f $(OBJ)

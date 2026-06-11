@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include "bistromatic.h"
 
 void check_ops(char const *ops)
 {
