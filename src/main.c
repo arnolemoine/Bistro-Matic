@@ -10,6 +10,7 @@
 #include <string.h>
 #include "bistromatic.h"
 #include "my.h"
+#include "bistromatic.h"
 
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size)

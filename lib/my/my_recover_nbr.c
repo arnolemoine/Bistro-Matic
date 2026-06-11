@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "my.h"
 
-int digits(int nb)
+int get_digits(int nb)
 {
     int cpt = 1;
 
@@ -21,7 +21,7 @@ int digits(int nb)
 
 char *my_recover_nbr(int nb)
 {
-    int len = digits(nb);
+    int len = get_digits(nb);
     char *buffer = malloc(sizeof(char) * len + 1);
     int i = len - 1;
 

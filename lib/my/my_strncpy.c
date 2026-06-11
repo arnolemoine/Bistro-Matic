@@ -5,21 +5,12 @@
 ** copy a number n of char
 */
 
-int my_strleng(char const *str)
-{
-    int length = 0;
-
-    while (*str != '\0') {
-        length++;
-        str++;
-    }
-    return length;
-}
+#include "my.h"
 
 char *my_strncpy(char *dest, char const *src, int n)
 {
     for (int i = 0; i < n; i++){
-        if (i > my_strleng(src)){
+        if (i > my_strlen(src)){
             dest[i] = '\0';
         }
         dest[i] = src[i];

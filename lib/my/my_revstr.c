@@ -40,3 +40,14 @@ char *my_revstr(char *str)
     }
     return str;
 }
+void my_revstr(char *str)
+{
+    int length = my_strlen(str);
+    char temp;
+
+    for (int i = 0; i < length / 2; i++) {
+        temp = str[i];
+        str[i] = str[length - 1 - i];
+        str[length - 1 - i] = temp;
+    }
+}

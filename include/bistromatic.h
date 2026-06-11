@@ -42,7 +42,7 @@ typedef struct s_num {
 
 char *eval_expr(char const *base, char const *ops,
     char const *expr, unsigned int size);
-char *get_expr(unsigned int size);
+// checks & helper
 void check_ops(char const *ops);
 void check_base(char const *b);
 int helper(void);

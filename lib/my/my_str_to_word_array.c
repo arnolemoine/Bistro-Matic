@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int in_delim(int i, char *av, char *delim)
+int is_delim(int i, char *av, char *delim)
 {
     for (int y = 0; delim[y]; y++) {
         if (av[i] && av[i] == delim[y]) {
@@ -17,18 +17,18 @@ int in_delim(int i, char *av, char *delim)
     return 0;
 }
 
-char **allocator_array(char *av, char *delimiter)
+char **allocate_array(char *av, char *delim)
 {
     char **array = NULL;
     int to_alloc = 1;
     int next_val = 0;
-    int in_delimit = 0;
+    int is_delimiter = 0;
 
     for (int i = 0; av[i]; i++) {
-        in_delimit = in_delim(i, av, delimiter);
-        if (!in_delimit)
+        is_delimiter = is_delim(i, av, delim);
+        if (!is_delimiter)
             next_val = 0;
-        if (in_delimit && !next_val) {
+        if (is_delimiter && !next_val) {
             next_val = 1;
             to_alloc++;
         }
@@ -39,14 +39,14 @@ char **allocator_array(char *av, char *delimiter)
     return array;
 }
 
-int stwa_supply(char *av, int *len, int *i, char *delimiter)
+int stwa_supply(char *av, int *len, int *i, char *delim)
 {
     int start = *i;
     int found = 0;
 
     *len = 0;
     for (; av[*i];) {
-        if (in_delim(*i, av, delimiter))
+        if (is_delim(*i, av, delim))
             found = 1;
         if (found)
             break;
@@ -56,20 +56,20 @@ int stwa_supply(char *av, int *len, int *i, char *delimiter)
     return start;
 }
 
-char **str_to_word_array(char *av, char *delimiter)
+char **str_to_word_array(char *av, char *delim)
 {
     int i = 0;
     int index = 0;
     int start = 0;
     int len = 0;
-    char **array = allocator_array(av, delimiter);
+    char **array = allocate_array(av, delim);
 
     while (av[i]) {
-        if (in_delim(i, av, delimiter)) {
+        if (is_delim(i, av, delim)) {
             i++;
             continue;
         }
-        start = stwa_supply(av, &len, &i, delimiter);
+        start = stwa_supply(av, &len, &i, delim);
         array[index] = malloc(len + 1);
         for (int j = 0; j < len; j++)
             array[index][j] = av[start + j];
