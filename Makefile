@@ -37,9 +37,7 @@ SRC =	src/check/check_base.c \
 		src/parser/parser.c \
 		src/parser/parser_utils.c \
 		src/helper.c \
-		src/main.c \
-		src/infinite/compare_infinites.c \
-		src/parser_utils.c \
+		src/main.c
 
 OBJ =   $(SRC:.c=.o)
 CFLAGS = -I./include/
@@ -83,9 +81,6 @@ fclean : fclean_tests clean
 	rm -f $(NAME)
 	make fclean -C ./lib/my/
 
-fclean : clean_tests clean
-		rm -f $(NAME)
-		make fclean -C ./lib/my/
 fclean_tests: fclean
 	rm -f $(TESTS_BIN)
 	rm -f *.gcda *.gcno
