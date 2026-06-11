@@ -8,10 +8,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "bistromatic.h"
 #include "my.h"
 #include "bistromatic.h"
 
-static char *get_expr(unsigned int size)
+char *get_expr(unsigned int size)
 {
     char *expr = NULL;
 

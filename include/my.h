@@ -14,12 +14,12 @@
     #include <unistd.h>
     #include <signal.h>
     #include <fcntl.h>
-    #include "bistromatic.h"
     #define ERROR 84
     #define BUF_SIZE 100000
 
 void my_putchar(char c);
 int my_putstr(char const *str);
+void my_revstr(char *str);
 int my_strlen(char const *str);
 char *my_strcpy(char *dest, char const *src);
 int my_strcmp(char const *s1, char const *s2);
@@ -29,5 +29,7 @@ int get_nb_r(char *str);
 char *my_recover_nbr(int nb);
 char **str_to_word_array(char *av, char *delimiter);
 int my_getnbr(const char *str);
+char *my_strndup(const char *str, int n);
+int is_base_char(char c, char *base);
 
 #endif /* !MY_H_ */

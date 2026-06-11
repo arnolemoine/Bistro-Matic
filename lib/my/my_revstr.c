@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2026
+** EPITECH PROJECT, 2025
 ** my_revstr
 ** File description:
 ** my_revstr
